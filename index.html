@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ade Sity Zhahara | Informatics Engineering Student ꨄ︎</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
+        body.light { --bg: linear-gradient(135deg, #f5bed0, #d2b1bb); --text: #4a2c3a; --card-bg: rgba(250,200,225,0.85); --border: #f390a9; --badge: #ffdee9; --badge-text: #b13e62; --footer: #ffecf1; --rainbow: linear-gradient(90deg,#ff6b6b,#ff9b6b,#ffd93b,#6bcb77,#4d96ff,#b56bff,#ff6b6b); --shadow: 0 20px 40px -12px rgba(236,72,153,0.15); }
+        body.dark { --bg: linear-gradient(135deg, #54223e, #2a1a30); --text: #f3dce8; --card-bg: rgba(30,20,40,0.85); --border: #b13e62; --badge: #381628; --badge-text: #ffb7cf; --footer: #1f1528; --rainbow: linear-gradient(90deg,#ff8888,#ffaa88,#ffe888,#88ff88,#8888ff,#cc88ff,#ff8888); --shadow: 0 20px 30px -12px rgba(0,0,0,0.4); }
+        body { background: var(--bg); color: var(--text); }
+        .nav { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: var(--card-bg); backdrop-filter: blur(20px); border-radius: 60px; padding: 12px 28px; display: flex; gap: 2rem; z-index: 1000; border: 1px solid var(--border); }
+        .nav a { color: #c4456e; font-size: 1.5rem; text-decoration: none; transition: 0.2s; }
+        .nav a:hover { color: #ff2e6e; transform: translateY(-4px); }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+        .avatar { width: 170px; height: 170px; margin: 0 auto 1.5rem; background: linear-gradient(135deg,#ffb3d1,#ff6f91); border-radius: 50%; padding: 5px; animation: float 3s ease-in-out infinite; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid white; }
+        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+        h1 { font-size: 3rem; font-weight: 800; background: linear-gradient(135deg,#d43f6b,#b52e5c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .badge { background: var(--badge); padding: 6px 16px; border-radius: 40px; display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--badge-text); }
+        .rainbow-card { background: var(--card-bg); border-radius: 2rem; padding: 1.5rem; position: relative; box-shadow: var(--shadow); transition: all 0.3s ease; }
+        .rainbow-card::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: var(--rainbow); border-radius: 2rem; z-index: -1; animation: rainbowMove 4s linear infinite; background-size: 200% 200%; }
+        @keyframes rainbowMove { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+        .rainbow-card:hover { transform: translateY(-5px); }
+        .skill-item { background: var(--card-bg); border-radius: 2rem; padding: 0.8rem 1.5rem; text-align: center; font-weight: 600; position: relative; box-shadow: var(--shadow); transition: all 0.3s ease; }
+        .skill-item::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: var(--rainbow); border-radius: 2rem; z-index: -1; animation: rainbowMove 4s linear infinite; background-size: 200% 200%; }
+        .skill-item:hover { transform: translateY(-5px); }
+        .skill-item i { margin-right: 8px; color: #e85d8f; }
+        .media-card { background: var(--card-bg); border-radius: 1.8rem; overflow: hidden; position: relative; box-shadow: var(--shadow); transition: all 0.3s ease; height: 100%; }
+        .media-card::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: var(--rainbow); border-radius: 1.8rem; z-index: -1; animation: rainbowMove 4s linear infinite; background-size: 200% 200%; }
+        .media-card:hover { transform: translateY(-10px); }
+        .media-header { background: linear-gradient(145deg,#ffc0dc,#ff9bc0); padding: 1rem; text-align: center; color: white; }
+        .media-content { padding: 1.2rem; }
+        .spotify-embed { border-radius: 12px; width: 100%; margin-bottom: 0.8rem; }
+        .artist-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; justify-content: center; }
+        .artist-link { background: rgba(255,105,180,0.2); padding: 8px 16px; border-radius: 30px; text-decoration: none; color: var(--text); transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 500; }
+        .artist-link:hover { background: #f472b6; color: white; transform: translateY(-2px); }
+        .movie-list { list-style: none; padding: 0; }
+        .movie-list li { padding: 12px 0; border-bottom: 1px solid rgba(255,105,180,0.3); display: flex; align-items: center; gap: 12px; }
+        .movie-list li i { color: #e85d8f; width: 28px; font-size: 1.2rem; }
+        .movie-list li a { flex: 1; text-decoration: none; color: var(--text); transition: 0.2s; font-weight: 500; }
+        .movie-list li a:hover { color: #f472b6; text-decoration: underline; }
+        .movie-list li .netflix-badge { background: #e50914; color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+        .social-link { display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; background: #ffe2ec; border-radius: 50%; font-size: 1.8rem; color: #c4456e; text-decoration: none; transition: 0.2s; }
+        .social-link:hover { background: #f472b6; color: white; transform: translateY(-6px); }
+        .toggle-btn { background: rgba(255,255,240,0.2); border: 1px solid #ff99cc; padding: 8px 18px; border-radius: 40px; cursor: pointer; font-size: 0.85rem; color: var(--text); margin: 0 5px; transition: 0.2s; }
+        .toggle-btn:hover, .toggle-btn.active { background: #ff99cc; color: white; }
+        input, textarea { background: rgba(255,245,250,0.5); border: 1px solid var(--border); border-radius: 60px; padding: 14px 20px; width: 100%; font-family: inherit; color: var(--text); font-size: 1rem; }
+        input:focus, textarea:focus { outline: none; border-color: #f472b6; }
+        footer { background: var(--footer); border-radius: 2rem 2rem 0 0; padding: 2rem; text-align: center; }
+        .container { max-width: 1200px; margin: auto; padding: 0 15px; }
+        .row { display: flex; flex-wrap: wrap; justify-content: center; }
+        .col-md-3, .col-md-4, .col-md-6 { padding: 12px; }
+        .col-md-3 { width: 25%; } .col-md-4 { width: 33.333%; } .col-md-6 { width: 50%; }
+        .col-6 { width: 50%; padding: 12px; }
+        .text-center { text-align: center; }
+        .mb-3 { margin-bottom: 1rem; } .mb-4 { margin-bottom: 1.5rem; } .mb-5 { margin-bottom: 2.5rem; }
+        .mt-2 { margin-top: 0.5rem; } .mt-3 { margin-top: 1rem; } .mt-4 { margin-top: 1.5rem; }
+        .py-5 { padding: 3rem 0; }
+        .d-flex { display: flex; } .justify-center { justify-content: center; } .gap-4 { gap: 1.5rem; } .flex-wrap { flex-wrap: wrap; }
+        .fw-bold { font-weight: 700; } .small { font-size: 0.85rem; } .fs-4 { font-size: 1.5rem; }
+        .preview-bubble { background: rgba(255,230,240,0.5); border-radius: 28px; padding: 1.2rem 1.5rem; margin-top: 1.5rem; border-left: 5px solid #ff99cc; backdrop-filter: blur(4px); }
+        .msg-preview-text { font-style: italic; word-break: break-word; line-height: 1.5; }
+        .messages-table-container { margin-top: 2rem; text-align: center; }
+        .messages-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 1.5rem; overflow: hidden; box-shadow: var(--shadow); }
+        .messages-table th, .messages-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(244,114,182,0.3); }
+        .messages-table th { background: #ff99cc; color: white; font-weight: 600; }
+        .btn-send { background: #ff99cc; color: white; border: none; padding: 12px 28px; font-weight: bold; }
+        .btn-view { background: #c4456e; color: white; border: none; padding: 10px 24px; margin-top: 1rem; }
+        .password-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(5px); }
+        .password-modal-content { background: var(--card-bg); border-radius: 2rem; padding: 2rem; max-width: 400px; width: 90%; text-align: center; }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } .col-md-3, .col-md-4, .col-md-6 { width: 100%; } .col-6 { width: 50%; } .nav { gap: 1rem; padding: 8px 20px; } .nav a { font-size: 1.2rem; } }
+    </style>
+</head>
+<body class="light">
+    <div class="nav">
+        <a href="#home"><i class="fas fa-home"></i></a>
+        <a href="#about"><i class="fas fa-user"></i></a>
+        <a href="#skills"><i class="fas fa-code"></i></a>
+        <a href="#media"><i class="fas fa-music"></i></a>
+        <a href="#contact"><i class="fas fa-paper-plane"></i></a>
+    </div>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="avatar"><img src="asz.jpeg" alt="Ade" onerror="this.src='https://via.placeholder.com/170x170?text=Ade'"></div>
+            <div class="badge" id="badgeText"> Informatics Engineering Student ꨄ</div>
+            <h1>Ade Sity Zhahara</h1>
+            <p class="fs-4" style="opacity:0.8" id="heroTagline">Blending tech and creativity. Singer | Editor | Designer | Drawing Enthusiast</p>
+            <div class="mt-4">
+                <button id="indBtn" class="toggle-btn active"><i class="fas fa-flag"></i> Indonesia</button>
+                <button id="engBtn" class="toggle-btn"><i class="fas fa-flag-usa"></i> English</button>
+                <button id="lightBtn" class="toggle-btn"><i class="fas fa-sun"></i> Light</button>
+                <button id="darkBtn" class="toggle-btn"><i class="fas fa-moon"></i> Dark</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge" id="aboutBadge"><i class="fas fa-star-of-life"></i> About Me</span>
+                <h2 class="mt-3">Get to Know <span style="background:linear-gradient(135deg,#f9a8d4,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent;">Ade</span></h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="rainbow-card">
+                        <h3><i class="fas fa-heart" style="color:#f472b6;"></i> <span id="bioTitle">Creative Bio</span></h3>
+                        <p class="mt-3" id="bioText">Halo! Saya Ade — seorang tech enthusiast yang percaya bahwa kode dan seni bisa berjalan beriringan. Saya suka bernyanyi, mengedit video, mendesain di Canva, dan menggambar ilustrasi. Yuk, kolaborasi! 💻✨</p>
+                        <div class="mt-4">
+                            <p><i class="fas fa-map-marker-alt" style="color:#f472b6;"></i> <span id="location">Indonesia · Open for collabs</span></p>
+                            <p><i class="fas fa-music" style="color:#f472b6;"></i> <span id="hobbies">Hobbies: Singing, Drawing, Editing & Design</span></p>
+                            <p><i class="fas fa-envelope" style="color:#f472b6;"></i> <span id="emailDisplay">adesity06@gmail.com</span></p>
+                            <p><i class="fas fa-laptop-code" style="color:#f472b6;"></i> <span id="hashtag">#TechGirl #CreativeHybrid</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rainbow-card">
+                        <h3><i class="fas fa-graduation-cap"></i> <span id="educationTitle">Education Journey</span></h3>
+                        <div class="mt-3">
+                            <p><strong>MIN 15 Pidie (2012-2017)</strong><br><a href="#" style="color:#f472b6;">min15pidie.sch.id</a></p>
+                            <p><strong>SMPN 2 Padang Tiji (2018-2020)</strong><br><a href="#" style="color:#f472b6;">School Profile</a></p>
+                            <p><strong>SMANSA Padang Tiji (2021-2023)</strong><br><a href="#" style="color:#f472b6;">Instagram @smansa.padangtiji</a></p>
+                            <p><strong>Universitas Jabal Ghafur (2025-sekarang)</strong><br><a href="#" style="color:#f472b6;">unigha.ac.id</a></p>
+                        </div>
+                        <div class="mt-3"><i class="fas fa-diploma"></i> <span id="educationFooter">Currently studying Informatics Engineering at Unigha</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-5" style="background:rgba(255,235,242,0.2)">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge"><i class="fas fa-cog"></i> <span id="skillsBadge">Superpowers</span></span>
+                <h2 class="mt-3"><span id="skillsTitle">My Skills</span></h2>
+            </div>
+            <div class="row justify-center">
+                <div class="col-6 col-md-3"><div class="skill-item"><i class="fas fa-microphone-alt"></i> <span id="skill1">Singing</span></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><i class="fas fa-video"></i> <span id="skill2">Video Editing</span></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><i class="fas fa-palette"></i> <span id="skill3">Canva Design</span></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><i class="fas fa-pencil-ruler"></i> <span id="skill4">Drawing</span></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><i class="fab fa-google"></i> <span id="skill5">Googling Skill</span></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><i class="fas fa-desktop"></i> <span id="skill6">Basic Computer Skills</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="media" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge"><i class="fas fa-headphones"></i> <span id="mediaBadge">My Favorites</span></span>
+                <h2 class="mt-3"><span id="mediaTitle">Music & </span><span style="color:#db5885;" id="mediaHighlight">Movies</span></h2>
+                <p id="mediaSubtitle">What I'm listening to & watching lately 🎵🎬</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="media-card">
+                        <div class="media-header"><i class="fab fa-spotify fa-2x"></i><h4 class="mt-2">🎧 My Favorite Music</h4></div>
+                        <div class="media-content">
+                            <iframe class="spotify-embed" src="https://open.spotify.com/embed/album/58eNU0JJvtAWAg9KUZ9Ghf?utm_source=generator" width="100%" height="200" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                            <div class="artist-list">
+                                <a href="#" class="artist-link"><i class="fab fa-spotify"></i> Ariana Grande</a>
+                                <a href="#" class="artist-link"><i class="fab fa-spotify"></i> Taylor Swift</a>
+                                <a href="#" class="artist-link"><i class="fab fa-spotify"></i> Billie Eilish</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="media-card">
+                        <div class="media-header"><i class="fas fa-film fa-2x"></i><h4 class="mt-2">📺 Movies I've Watched</h4></div>
+                        <div class="media-content">
+                            <ul class="movie-list">
+                                <li><i class="fas fa-crown"></i> <a href="#">Matilda (1996) <span class="netflix-badge">Watch on Netflix</span></a></li>
+                                <li><i class="fas fa-hat-wizard"></i> <a href="#">The School for Good and Evil <span class="netflix-badge">Watch on Netflix</span></a></li>
+                                <li><i class="fas fa-cloud-moon"></i> <a href="#">Slumberland <span class="netflix-badge">Watch on Netflix</span></a></li>
+                                <li><i class="fas fa-dragon"></i> <a href="#">Damsel <span class="netflix-badge">Watch on Netflix</span></a></li>
+                                <li><i class="fas fa-ghost"></i> <a href="#">Miss Peregrine's Home <span class="netflix-badge">Watch on Netflix</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5" style="background:var(--footer)">
+        <div class="container">
+            <div class="text-center mb-4">
+                <span class="badge"><i class="fas fa-heart"></i> <span id="contactBadge">Connect</span></span>
+                <h2 class="mt-3"><span id="contactTitle">Find Me on Socials</span></h2>
+            </div>
+            <div class="d-flex justify-center gap-4 flex-wrap mb-5">
+                <a href="https://www.instagram.com/adstzhr06" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/6285262137428" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.tiktok.com/@adszhr179" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8" style="margin: 0 auto;">
+                    <div class="rainbow-card">
+                        <h5 class="text-center"><i class="fas fa-comment-dots"></i> <span id="writeMessageTitle">💬 Tulis Pesanmu</span></h5>
+                        <p class="text-center small" id="writeMessageDesc">Ketik nama, email, dan pesanmu. Pratinjau akan muncul secara langsung ✨</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="inputName" placeholder="Nama / Name" class="mb-3" autocomplete="off">
+                                <input type="email" id="inputEmail" placeholder="Email (opsional)" class="mb-3" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <textarea rows="4" id="inputMessage" placeholder="Tulis pesanmu di sini... 💌" class="mb-3" style="border-radius: 24px;"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-bubble">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <i class="fas fa-user-circle" style="font-size: 32px; color: #f472b6;"></i>
+                                <div><span class="fw-bold">Dari: </span><span id="previewNameText" style="font-weight: 600;">Belum diisi</span></div>
+                            </div>
+                            <div style="margin-bottom: 12px;"><i class="fas fa-envelope" style="color:#f472b6;"></i> <span id="previewEmailText">-</span></div>
+                            <div style="border-top: 1px dashed rgba(244,114,182,0.4); padding-top: 12px;"><i class="fas fa-comment" style="color:#f472b6;"></i> <span id="previewMessageText" class="msg-preview-text">✨ Pesanmu akan muncul di sini...</span></div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button id="sendMessageBtn" class="toggle-btn btn-send"><i class="fas fa-paper-plane"></i> <span id="sendBtnText">Kirim Pesan</span></button>
+                        </div>
+                        <p class="small text-center mt-3"><i class="fas fa-lock"></i> <span id="liveHint">Pesan tersimpan. Lihat pesan dengan password: 123</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button id="viewMessagesBtn" class="toggle-btn btn-view"><i class="fas fa-eye"></i> <span id="viewBtnText">🔒 Lihat Semua Pesan</span></button>
+            </div>
+
+            <div id="messagesTableContainer" class="messages-table-container" style="display: none;">
+                <div class="row">
+                    <div class="col-md-10" style="margin: 0 auto;">
+                        <div class="rainbow-card">
+                            <h5 class="text-center"><i class="fas fa-inbox"></i> <span id="messagesTitle">📩 Semua Pesan</span></h5>
+                            <div style="overflow-x: auto;">
+                                <table class="messages-table">
+                                    <thead><tr><th>#</th><th>Nama</th><th>Email</th><th>Pesan</th><th>Waktu</th></tr></thead>
+                                    <tbody id="messagesTableBody"><tr><td colspan="5" class="text-center">Belum ada pesan</td></tr></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer><p id="footerText">© 2026 Ade Sity Zhahara — Informatics Engineering Student</p></footer>
+
+    <script>
+        let messages = JSON.parse(localStorage.getItem('guestMessages')) || [];
+        
+        function updatePreview() {
+            document.getElementById('previewNameText').innerText = document.getElementById('inputName').value.trim() || 'Belum diisi';
+            document.getElementById('previewEmailText').innerText = document.getElementById('inputEmail').value.trim() || '-';
+            let msg = document.getElementById('inputMessage').value.trim();
+            document.getElementById('previewMessageText').innerText = msg || '✨ Pesanmu akan muncul di sini...';
+        }
+        
+        document.getElementById('inputName').addEventListener('input', updatePreview);
+        document.getElementById('inputEmail').addEventListener('input', updatePreview);
+        document.getElementById('inputMessage').addEventListener('input', updatePreview);
+        
+        document.getElementById('sendMessageBtn').addEventListener('click', function() {
+            let name = document.getElementById('inputName').value.trim();
+            let email = document.getElementById('inputEmail').value.trim();
+            let message = document.getElementById('inputMessage').value.trim();
+            if (!name || !message) { alert('Nama dan pesan harus diisi!'); return; }
+            messages.unshift({ name: name, email: email || '-', message: message, time: new Date().toLocaleString('id-ID') });
+            localStorage.setItem('guestMessages', JSON.stringify(messages));
+            document.getElementById('inputName').value = '';
+            document.getElementById('inputEmail').value = '';
+            document.getElementById('inputMessage').value = '';
+            updatePreview();
+            alert('✅ Pesan terkirim!');
+        });
+        
+        function showPasswordModal() {
+            let modal = document.createElement('div');
+            modal.className = 'password-modal';
+            modal.innerHTML = `<div class="password-modal-content"><i class="fas fa-lock" style="font-size: 40px; color:#f472b6;"></i><h3 class="mt-3">Verifikasi Admin</h3><input type="password" id="passwordInput" placeholder="Masukkan password" class="mb-3" style="width:100%"><div class="d-flex justify-center gap-3"><button id="submitPassword" class="toggle-btn">Masuk</button><button id="closeModal" class="toggle-btn">Batal</button></div></div>`;
+            document.body.appendChild(modal);
+            document.getElementById('submitPassword').onclick = function() {
+                let pwd = document.getElementById('passwordInput').value;
+                if (pwd === '123') {
+                    modal.remove();
+                    let tbody = document.getElementById('messagesTableBody');
+                    if (messages.length === 0) tbody.innerHTML = '<tr><td colspan="5" class="text-center">Belum ada pesan</td></tr>';
+                    else {
+                        tbody.innerHTML = '';
+                        messages.forEach((msg, idx) => {
+                            let row = `<tr><td>${idx+1}</td><td>${escapeHtml(msg.name)}</td><td>${escapeHtml(msg.email)}</td><td>${escapeHtml(msg.message)}</td><td>${msg.time}</td></tr>`;
+                            tbody.innerHTML += row;
+                        });
+                    }
+                    document.getElementById('messagesTableContainer').style.display = 'block';
+                } else { alert('Password salah!'); modal.remove(); }
+            };
+            document.getElementById('closeModal').onclick = () => modal.remove();
+        }
+        
+        function escapeHtml(str) { return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+        
+        document.getElementById('viewMessagesBtn').addEventListener('click', showPasswordModal);
+        
+        const trans = {
+            ind: { badgeText: " Informatics Engineering Student ꨄ", heroTagline: "Menyatukan teknologi dan kreativitas", aboutBadge: "<i class='fas fa-star-of-life'></i> Tentang Saya", bioTitle: "Bio Kreatif", bioText: "Halo! Saya Ade — tech enthusiast yang percaya kode dan seni bisa berjalan beriringan.", location: "Indonesia", hobbies: "Hobi: Menyanyi, Menggambar, Editing", emailDisplay: "adesity06@gmail.com", hashtag: "#TechGirl", educationTitle: "Perjalanan Pendidikan", educationFooter: "Mahasiswa Teknik Informatika", skillsBadge: "Kemampuan", skillsTitle: "Keahlianku", skill1: "Menyanyi", skill2: "Editing Video", skill3: "Desain Canva", skill4: "Menggambar", skill5: "Googling", skill6: "Komputer", mediaBadge: "Favoritku", mediaTitle: "Musik & ", mediaHighlight: "Film", mediaSubtitle: "Yang aku putar & tonton", contactBadge: "Terhubung", contactTitle: "Temukan Aku", writeMessageTitle: "💬 Tulis Pesanmu", writeMessageDesc: "Ketik nama, email, dan pesanmu", sendBtnText: "Kirim Pesan", viewBtnText: "🔒 Lihat Semua Pesan", messagesTitle: "📩 Semua Pesan", liveHint: "Pesan tersimpan. Lihat pesan dengan password", footerText: "© 2026 Ade Sity Zhahara" },
+            eng: { badgeText: " Informatics Engineering Student ꨄ", heroTagline: "Blending tech and creativity", aboutBadge: "<i class='fas fa-star-of-life'></i> About Me", bioTitle: "Creative Bio", bioText: "Hi! I'm Ade — a tech enthusiast who believes code and art go hand in hand.", location: "Indonesia", hobbies: "Hobbies: Singing, Drawing, Editing", emailDisplay: "adesity06@gmail.com", hashtag: "#TechGirl", educationTitle: "Education Journey", educationFooter: "Informatics Engineering Student", skillsBadge: "Superpowers", skillsTitle: "My Skills", skill1: "Singing", skill2: "Video Editing", skill3: "Canva Design", skill4: "Drawing", skill5: "Googling", skill6: "Computer", mediaBadge: "My Favorites", mediaTitle: "Music & ", mediaHighlight: "Movies", mediaSubtitle: "What I'm listening to", contactBadge: "Connect", contactTitle: "Find Me", writeMessageTitle: "💬 Write Your Message", writeMessageDesc: "Type your name, email, and message", sendBtnText: "Send Message", viewBtnText: "🔒 View All Messages", messagesTitle: "📩 All Messages", liveHint: "Messages saved. View with password: 123", footerText: "© 2026 Ade Sity Zhahara" }
+        };
+        let lang = 'ind';
+        function setLang(l) { lang = l; Object.keys(trans[l]).forEach(k => { let el = document.getElementById(k); if(el) el.innerHTML = trans[l][k]; }); }
+        document.getElementById('indBtn').onclick = () => { setLang('ind'); setActive('indBtn'); };
+        document.getElementById('engBtn').onclick = () => { setLang('eng'); setActive('engBtn'); };
+        function setActive(id) { ['indBtn','engBtn'].forEach(btn => { document.getElementById(btn).classList.remove('active'); }); document.getElementById(id).classList.add('active'); }
+        document.getElementById('lightBtn').onclick = () => { document.body.classList.remove('dark'); document.body.classList.add('light'); };
+        document.getElementById('darkBtn').onclick = () => { document.body.classList.remove('light'); document.body.classList.add('dark'); };
+        setLang('ind'); updatePreview();
+    </script>
+</body>
+</html>
